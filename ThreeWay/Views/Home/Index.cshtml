@@ -1,2 +1,39 @@
 ﻿@model ThreeWay.Models.Person
-<p>@Model.FirstName @Model.LastName</p>
+<section>
+	<h2>HTML</h2>
+	<p>@Model.FirstName @Model.LastName</p>
+</section>
+
+<section>
+	<h2>JSON</h2>
+	<div id="json"></div>
+</section>
+
+<section>
+	<h2>XML</h2>
+	<div id="xml"></div>
+</section>
+
+<script async="async">
+	(function () {
+		"use strict";
+		var json = document.querySelector("#json"),
+			xml = document.querySelector("#xml"),
+			showJson = function showJson() { 
+				json.textContent = jsonReq.response;
+			},
+			showXml = function showXml(data) {
+				xml.textContent = xmlReq.response;
+			},
+			jsonReq = new XMLHttpRequest(),
+			xmlReq = new XMLHttpRequest();
+		jsonReq.open("GET", "/");
+		jsonReq.setRequestHeader("Accept", "application/json");
+		jsonReq.addEventListener("load", showJson);
+		jsonReq.send();
+		xmlReq.open("GET", "/");
+		xmlReq.setRequestHeader("Accept", "application/xml");
+		xmlReq.addEventListener("load", showXml);
+		xmlReq.send();
+	})();
+</script>
