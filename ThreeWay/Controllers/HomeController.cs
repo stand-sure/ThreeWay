@@ -1,29 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
-using System.Runtime.CompilerServices;
-using XmlResult = ThreeWay.Common.XmlResult;
-using ThreeWay.Common;
+﻿// //-----------------------------------------------------------------------
+// // <copyright file="HomeController.cs" company="Stand Sure LLC">
+// //     Copyright (c) 2016 . All rights reserved.
+// // </copyright>
+// //-----------------------------------------------------------------------
 
 namespace ThreeWay.Controllers
 {
+  using System.Web.Mvc;
+  using Common;
+
+  /// <summary>
+  /// Home controller.
+  /// </summary>
   public class HomeController : Controller
   {
+    /// <summary>
+    /// GET: /
+    /// </summary>
+    /// <param name="fmt">An optional flag. Values of "json" or "xml" will override ACCEPT header.</param>
+    /// <returns>An <see cref="T:ThreeWay.Common.AcceptTypeResult"/> instance.
+    /// The <c>ExecuteResult</c> method will invoke the 
+    /// same method in the ViewResult, JsonResult or XmlResult.</returns>
     [HttpGet]
     public ActionResult Index(string fmt)
     {
-      var mvcName = typeof(Controller).Assembly.GetName();
-      var isMono = Type.GetType("Mono.Runtime") != null;
+      var model = new Models.Person() { FirstName = "John", LastName = "Smith" };
 
-      ViewData["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
-      ViewData["Runtime"] = isMono ? "Mono" : ".NET";
+      var result = new AcceptTypeResult("Index", model)
+      {
+        TempData = this.TempData,
+        ViewData = this.ViewData,
+        MasterName = string.Empty
+      };
 
-      var model = new Models.Person() { FirstName="John", LastName="Smith"};
-
-      return new AcceptTypeResult("Index", model);
+      return result;
     }
   }
 }
