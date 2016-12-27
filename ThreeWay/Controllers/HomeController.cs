@@ -22,7 +22,7 @@ namespace ThreeWay.Controllers
     /// The <c>ExecuteResult</c> method will invoke the 
     /// same method in the ViewResult, JsonResult or XmlResult.</returns>
     [HttpGet]
-    public ActionResult Index(string fmt)
+    public ActionResult Index()
     {
       var model = new Models.Person() { FirstName = "John", LastName = "Smith" };
 

@@ -10,7 +10,7 @@ using ThreeWay.Controllers;
 namespace ThreeWay.Tests.Controllers
 {
   [TestFixture]
-  public class HomeControllerTest
+  public class HomeControllerTest : AssertionHelper
   {
     [Test]
     public void Index()
@@ -19,17 +19,10 @@ namespace ThreeWay.Tests.Controllers
       var controller = new HomeController();
 
       // Act
-      var result = (ViewResult)controller.Index(null);
-
-      var mvcName = typeof(Controller).Assembly.GetName();
-      var isMono = Type.GetType("Mono.Runtime") != null;
-
-      var expectedVersion = mvcName.Version.Major + "." + mvcName.Version.Minor;
-      var expectedRuntime = isMono ? "Mono" : ".NET";
+      var result = controller.Index();
 
       // Assert
-      Assert.AreEqual(expectedVersion, result.ViewData["Version"]);
-      Assert.AreEqual(expectedRuntime, result.ViewData["Runtime"]);
+
     }
   }
 }
