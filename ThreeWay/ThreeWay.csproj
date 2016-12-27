@@ -93,6 +93,7 @@
     <Compile Include="Models\Person.cs" />
     <Compile Include="Common\XmlResult.cs" />
     <Compile Include="Common\AcceptTypeResult.cs" />
+    <Compile Include="Common\XmlResultControllerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
